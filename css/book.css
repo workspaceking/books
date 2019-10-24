@@ -1,0 +1,57 @@
+.birdbook-fixed {
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%
+}
+.birdbook-dynamic {
+    /*display: none;*/
+}
+
+.birdbook-left-column {
+    float: left;
+    width: 50%;
+}
+
+.birdbook-right-column {
+    float: right;
+    width: 50%;
+}
+
+.birdbook-spacer {
+    float: left;
+    width: 25%;
+}
+
+.birdbook-confirm-container {
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+}
+.birdbook-col {
+    border-style: solid;
+}
+.birdbook-col-truncated {
+    width: 100px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+button.ui.button, .ui.form .field>label{
+    height: auto;
+}
+.grid.container {
+    margin-top: 5em;
+  }
+  .inputfile {
+      width: 0.1px;
+      height: 0.1px;
+      opacity: 0;
+      overflow: hidden;
+      position: absolute;
+      z-index: -1;
+  }
+
+  .pt-8 {
+      padding-top: 32px;
+  }
