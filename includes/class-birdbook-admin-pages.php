@@ -28,8 +28,8 @@ class BirdBookAdminPages
 		add_action('admin_print_scripts' , array($this, 'add_scripts'));
 		add_submenu_page(
 			'birdbook-books-submenu-page',
-			'Bird',
-			'Bird',
+			'Birds',
+			'Birds',
 			'manage_options',
 			'birdbook-birds-settings',
 			function() { $this->birdbook_books_submenu_page_callback('birds'); }
@@ -44,14 +44,14 @@ class BirdBookAdminPages
 			function() { $this->birdbook_books_submenu_page_callback('location'); }
 		);
 
-		add_submenu_page(
-			'birdbook-books-submenu-page',
-			'Bird Filters',
-			'Bird Filters',
-			'manage_options',
-			'birdbook-bird-filters-settings',
-			function() { $this->birdbook_books_submenu_page_callback('filter'); }
-		);
+		// add_submenu_page(
+		// 	'birdbook-books-submenu-page',
+		// 	'Bird Filters',
+		// 	'Bird Filters',
+		// 	'manage_options',
+		// 	'birdbook-bird-filters-settings',
+		// 	function() { $this->birdbook_books_submenu_page_callback('filter'); }
+		// );
 
 	
 

@@ -1,3 +1,7 @@
+.pt-8 {
+    padding: 8px;
+}
+
 .birdbook-fixed {
     margin-left: auto;
     margin-right: auto;
@@ -37,7 +41,7 @@
     white-space: nowrap;
 }
 
-button.ui.button, .ui.form .field>label{
+button.ui.button, div.ui.button ,.ui.form .field>label{
     height: auto;
 }
 .grid.container {
@@ -55,3 +59,33 @@ button.ui.button, .ui.form .field>label{
   .pt-8 {
       padding-top: 32px;
   }
+
+  .birds .item li {
+    background: #e0e1e2;
+    padding: 10px;
+}
+
+.ui.button.transparent {
+    background-color: transparent;
+}
+
+#gallery .ui.card , #bird_gallery .row, #bird_gallery .card{
+    width: auto;
+    min-width: -webkit-fill-available;
+}
+
+#bird_gallery .ui.small.images.segment {
+    text-align: center;
+}
+
+.gallery a {
+    text-decoration: none;
+}
+
+a.ui.label {
+    text-decoration: none !important;
+}
+
+.gallery.ui.centered.grid {
+    margin: 0 auto;
+}

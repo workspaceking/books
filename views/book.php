@@ -2,246 +2,69 @@
 
 <div class="container">
 <div class="pt-8"></div>
-    <div class="ui grid">
-        <div class="ui four wide cards">
-            <a class="red card">
-                <div class="content">
-                    <div class="header">Bird Name</div>
-                    <div class="meta">
-                        <span class="category">location</span>
-                    </div>
-                    <div class="description">
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Recusandae laborum ab iusto eius,
-                            eum corrupti incidunt numquam velit.
-                            In exercitationem consectetur rerum hic, nesciunt cum omnis nisi corporis quasi vero!</p>
-                    </div>
-                </div>
-                <div class="extra content">
-                    <div class="right floated author">
-                        <img class="ui avatar image" src="<?php echo $img; ?>"> ...
-                    </div>
-                </div>
 
-            </a>
-            <a class="orange card">
-                <div class="content">
-                    <div class="header">Bird Name</div>
-                    <div class="meta">
-                        <span class="category">location</span>
-                    </div>
-                    <div class="description">
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Recusandae laborum ab iusto eius,
-                            eum corrupti incidunt numquam velit.
-                            In exercitationem consectetur rerum hic, nesciunt cum omnis nisi corporis quasi vero!</p>
-                    </div>
-                </div>
-                <div class="extra content">
-                    <div class="right floated author">
-                        <img class="ui avatar image" src="<?php echo $img; ?>"> ...
-                    </div>
-                </div>
-            </a>
-            <a class="yellow card">
-                <div class="content">
-                    <div class="header">Bird Name</div>
-                    <div class="meta">
-                        <span class="category">location</span>
-                    </div>
-                    <div class="description">
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Recusandae laborum ab iusto eius,
-                            eum corrupti incidunt numquam velit.
-                            In exercitationem consectetur rerum hic, nesciunt cum omnis nisi corporis quasi vero!</p>
-                    </div>
-                </div>
-                <div class="extra content">
-                    <div class="right floated author">
-                        <img class="ui avatar image" src="<?php echo $img; ?>"> ...
-                    </div>
-                </div>
-            </a>
-            <a class="olive card">
-                <div class="content">
-                    <div class="header">Bird Name</div>
-                    <div class="meta">
-                        <span class="category">location</span>
-                    </div>
-                    <div class="description">
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Recusandae laborum ab iusto eius,
-                            eum corrupti incidunt numquam velit.
-                            In exercitationem consectetur rerum hic, nesciunt cum omnis nisi corporis quasi vero!</p>
-                    </div>
-                </div>
-                <div class="extra content">
-                    <div class="right floated author">
-                        <img class="ui avatar image" src="<?php echo $img; ?>"> ...
-                    </div>
-                </div>
-            </a>
-            <a class="green card">
-                <div class="content">
-                    <div class="header">Bird Name</div>
-                    <div class="meta">
-                        <span class="category">location</span>
-                    </div>
-                    <div class="description">
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Recusandae laborum ab iusto eius,
-                            eum corrupti incidunt numquam velit.
-                            In exercitationem consectetur rerum hic, nesciunt cum omnis nisi corporis quasi vero!</p>
-                    </div>
-                </div>
-                <div class="extra content">
-                    <div class="right floated author">
-                        <img class="ui avatar image" src="<?php echo $img; ?>"> ...
-                    </div>
-                </div>
-            </a>
-            <a class="teal card">
-                <div class="content">
-                    <div class="header">Bird Name</div>
-                    <div class="meta">
-                        <span class="category">location</span>
-                    </div>
-                    <div class="description">
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Recusandae laborum ab iusto eius,
-                            eum corrupti incidunt numquam velit.
-                            In exercitationem consectetur rerum hic, nesciunt cum omnis nisi corporis quasi vero!</p>
-                    </div>
-                </div>
-                <div class="extra content">
-                    <div class="right floated author">
-                        <img class="ui avatar image" src="<?php echo $img; ?>"> ...
-                    </div>
-                </div>
-            </a>
-            <a class="blue card">
-                <div class="content">
-                    <div class="header">Bird Name</div>
-                    <div class="meta">
-                        <span class="category">location</span>
-                    </div>
-                    <div class="description">
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Recusandae laborum ab iusto eius,
-                            eum corrupti incidunt numquam velit.
-                            In exercitationem consectetur rerum hic, nesciunt cum omnis nisi corporis quasi vero!</p>
-                    </div>
-                </div>
-                <div class="extra content">
-                    <div class="right floated author">
-                        <img class="ui avatar image" src="<?php echo $img; ?>"> ...
-                    </div>
-                </div>
-            </a>
-            <a class="violet card">
-                <div class="content">
-                    <div class="header">Bird Name</div>
-                    <div class="meta">
-                        <span class="category">location</span>
-                    </div>
-                    <div class="description">
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Recusandae laborum ab iusto eius,
-                            eum corrupti incidunt numquam velit.
-                            In exercitationem consectetur rerum hic, nesciunt cum omnis nisi corporis quasi vero!</p>
-                    </div>
-                </div>
-                <div class="extra content">
-                    <div class="right floated author">
-                        <img class="ui avatar image" src="<?php echo $img; ?>"> ...
-                    </div>
-                </div>
-            </a>
-            <a class="purple card">
-                <div class="content">
-                    <div class="header">Bird Name</div>
-                    <div class="meta">
-                        <span class="category">location</span>
-                    </div>
-                    <div class="description">
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Recusandae laborum ab iusto eius,
-                            eum corrupti incidunt numquam velit.
-                            In exercitationem consectetur rerum hic, nesciunt cum omnis nisi corporis quasi vero!</p>
-                    </div>
-                </div>
-                <div class="extra content">
-                    <div class="right floated author">
-                        <img class="ui avatar image" src="<?php echo $img; ?>"> ...
-                    </div>
-                </div>
-            </a>
-            <a class="pink card">
-                <div class="content">
-                    <div class="header">Bird Name</div>
-                    <div class="meta">
-                        <span class="category">location</span>
-                    </div>
-                    <div class="description">
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Recusandae laborum ab iusto eius,
-                            eum corrupti incidunt numquam velit.
-                            In exercitationem consectetur rerum hic, nesciunt cum omnis nisi corporis quasi vero!</p>
-                    </div>
-                </div>
-                <div class="extra content">
-                    <div class="right floated author">
-                        <img class="ui avatar image" src="<?php echo $img; ?>"> ...
-                    </div>
-                </div>
-            </a>
-            <a class="brown card">
-                <div class="content">
-                    <div class="header">Bird Name</div>
-                    <div class="meta">
-                        <span class="category">location</span>
-                    </div>
-                    <div class="description">
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Recusandae laborum ab iusto eius,
-                            eum corrupti incidunt numquam velit.
-                            In exercitationem consectetur rerum hic, nesciunt cum omnis nisi corporis quasi vero!</p>
-                    </div>
-                </div>
-                <div class="extra content">
-                    <div class="right floated author">
-                        <img class="ui avatar image" src="<?php echo $img; ?>"> ...
-                    </div>
-                </div>
-            </a>
-            <a class="grey card">
-                <div class="content">
-                    <div class="header">Bird Name</div>
-                    <div class="meta">
-                        <span class="category">location</span>
-                    </div>
-                    <div class="description">
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Recusandae laborum ab iusto eius,
-                            eum corrupti incidunt numquam velit.
-                            In exercitationem consectetur rerum hic, nesciunt cum omnis nisi corporis quasi vero!</p>
-                    </div>
-                </div>
-                <div class="extra content">
-                    <div class="right floated author">
-                        <img class="ui avatar image" src="<?php echo $img; ?>"> ...
-                    </div>
-                </div>
-            </a>
-            <a class="black card">
-                <div class="content">
-                    <div class="header">Bird Name</div>
-                    <div class="meta">
-                        <span class="category">location</span>
-                    </div>
-                    <div class="description">
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Recusandae laborum ab iusto eius,
-                            eum corrupti incidunt numquam velit.
-                            In exercitationem consectetur rerum hic, nesciunt cum omnis nisi corporis quasi vero!</p>
-                    </div>
-                </div>
-                <div class="extra content">
-                    <div class="right floated author">
-                        <img class="ui avatar image" src="<?php echo $img; ?>"> ...
-                    </div>
-                </div>
-            </a>
-        </div>
-    </div>
+<div class="" style="padding:10px"></div>
+<div class="ui grid">
+     
+ 
+
+         <?php
+
+            $galleryList  =  is_array(get_option('birds_gallery')) ? get_option('birds_gallery') : [];
+
+            if (!empty($galleryList)) {
+
+                foreach ($galleryList as $gallery) {
+                    $images = explode(",", $gallery['images']);
+                    ?>
+                 <div class="six wide column card">
+                     <div>
+
+                         <span class="ui basic image label">
+                             <i class="map marker icon"></i>
+                             <?php echo $gallery['name']; ?>
+                         </span>
+                         <span class="ui teal image label">
+                             <i class="map marker icon"></i>
+                             <?php echo $gallery['location']; ?>
+                         </span>
+                         <span class="ui red  image label">
+                             <i class="map marker icon"></i>
+                             <?php echo $gallery['filter']; ?>
+                         </span>
+
+                         <form class="ui form" method="post">
+                             <div class="right floated author">
+                                 <input type="hidden" name="del" value="<?php echo $gallery['id']; ?>" />
+                                 <button class="circular ui icon button  right floated " type="submit">
+                                     <i class="icon x"></i>
+                                 </button>
+                             </div>
+                         </form>
+
+                     </div>
+
+                     <br>
+                     <br>
+
+                     <div class="ui small images segment">
+                         <?php
+                                    foreach ($images as $value) { ?>
+
+                             <img src="<?php echo $value; ?>" style="height: 85px;width:auto;">
 
 
-    
+                         <?php }
+
+                                    ?>
+                     </div>
+                 </div>
+
+         <?php }
+            }
+
+            ?> 
+
+ </div>
+
 </div>
