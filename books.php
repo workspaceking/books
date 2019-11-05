@@ -15,14 +15,14 @@ Domain Path: /languages
 require_once __DIR__ . '/includes/class-birdbook-book-search.php';
 require_once __DIR__ . '/includes/class-birdbook-admin-pages.php';
 
-new \birdbook\birdbookearch(new \birdbook\BirdBookBook(), new \birdbook\BirdBookGoogleBookApi());
+new \birdbook\birdbooksearch(new \birdbook\BirdBookBook(), new \birdbook\BirdBookGoogleBookApi());
 new \birdbook\BirdBookAdminPages();
 function loadStylesandScripts()
 {
 
     wp_enqueue_style('gallery-css',  plugin_dir_url(__FILE__) . 'css/book.css');
-    wp_enqueue_style('semantic-ui', 'https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css');
-    wp_enqueue_script('semantic-ui-script', 'https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.js', ['jquery'], '', true);
+    wp_enqueue_style('semantic-ui',  plugin_dir_url(__FILE__) .  'js/semantic.min.css');
+    wp_enqueue_script('semantic-ui-script',  plugin_dir_url(__FILE__) .  'js/semantic.min.js', ['jquery'], '', true);
 }
 add_action('wp_enqueue_scripts', 'loadStylesandScripts');
 
@@ -120,7 +120,7 @@ function showBirds($atts)
                         <a class="header">' . $bird['name'] . '</a>
                         <div class="meta"> 
                             ' . $bird['description'] . '
-                            foo ooooo = ' . $atts['foo'] . ' = ' . $_GET['location'] . ' = ' . $bird['location'] . '
+                           
                         </div>
                     </div> </div>';
                         }
@@ -132,7 +132,7 @@ function showBirds($atts)
                         <a class="header">' . $bird['name'] . '</a>
                         <div class="meta"> 
                             ' . $bird['description'] . '
-                            foo ooooo = ' . $atts['foo'] . ' = ' . $_GET['location'] . ' = ' . $bird['location'] . '
+                          
                         </div>
                     </div> </div>';
                     }
@@ -146,7 +146,7 @@ function showBirds($atts)
                     <a class="header">' . $bird['name'] . '</a>
                     <div class="meta"> 
                         ' . $bird['description'] . '
-                        foo ooooo = ' . $atts['foo'] . ' 
+                    
                     </div>
                 </div> </div>';
             }
@@ -162,12 +162,12 @@ function showBirds($atts)
         ' . $locations . ' 
         </div>
         
-        <div  class=" ">
+        <div  class="row">
                         
                 ' . $filterValues . '
             
         </div>
-        <div class="six wide tablet sixteen wide mobile  sixteen wide computer column">
+        <div class="six wide tablet sixteen wide mobile  twelve wide computer column">
  
 
 
@@ -189,7 +189,7 @@ function showBirds($atts)
         // echo $shortcode;
     }
     $value .= '<div class="gallery ui centered grid">
-    <div class="six wide tablet sixteen wide mobile  sixteen wide computer column">
+    <div class="six wide tablet sixteen wide mobile  twelve wide computer column">
         <div id="bird_gallery">
             <div class="ui cards centered">
             ' . do_shortcode($shortcode) . '
@@ -200,5 +200,5 @@ function showBirds($atts)
     return $value;
 }
 
-add_shortcode('footag', 'showBirds');
+add_shortcode('birds_list', 'showBirds');
 add_shortcode('bird_gallery', 'showGallery');

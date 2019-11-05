@@ -12,7 +12,7 @@ namespace birdbook;
 require_once __DIR__ . '/class-birdbook-book.php';
 require_once  __DIR__ . '/class-birdbook-google-book-api.php';
 
-class birdbookearch
+class birdbooksearch
 {
 
 	private $google_api;

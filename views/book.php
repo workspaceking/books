@@ -36,9 +36,7 @@
                          <form class="ui form" method="post">
                              <div class="right floated author">
                                  <input type="hidden" name="del" value="<?php echo $gallery['id']; ?>" />
-                                 <button class="circular ui icon button  right floated " type="submit">
-                                     <i class="icon x"></i>
-                                 </button>
+                           
                              </div>
                          </form>
 
