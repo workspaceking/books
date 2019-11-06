@@ -44,14 +44,14 @@ class BirdBookAdminPages
 			function() { $this->birdbook_books_submenu_page_callback('location'); }
 		);
 
-		// add_submenu_page(
-		// 	'birdbook-books-submenu-page',
-		// 	'Bird Filters',
-		// 	'Bird Filters',
-		// 	'manage_options',
-		// 	'birdbook-bird-filters-settings',
-		// 	function() { $this->birdbook_books_submenu_page_callback('filter'); }
-		// );
+		add_submenu_page(
+			'birdbook-books-submenu-page',
+			'Filters',
+			'Filters',
+			'manage_options',
+			'birdbook-bird-filters-settings',
+			function() { $this->birdbook_books_submenu_page_callback('filter'); }
+		);
 
 	
 

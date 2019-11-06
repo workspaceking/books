@@ -37,9 +37,9 @@ function showGallery($atts)
         foreach ($galleryList as $gallery) {
             $images = explode(",", $gallery['images']);
             $g = '';
-            if(isset($atts['g']))
-             $g = $atts['g'];
-            if ($gallery['id'] ==$g || $gallery['location'] == $atts['l'] || $gallery['location'] == $atts['l'] && $gallery['filter'] == $atts['f']) {
+            if (isset($atts['g']))
+                $g = $atts['g'];
+            if ($gallery['id'] == $g || $gallery['location'] == $atts['l'] || $gallery['location'] == $atts['l'] && $gallery['filter'] == $atts['f']) {
                 $selectedGallery .=  ' <div class="card">
             <div>
          
@@ -182,10 +182,24 @@ function showBirds($atts)
 
         </div>
     </div>
-';
+'; 
+$birdsGallery  =  is_array(get_option('birds_gallery')) ? get_option('birds_gallery') : [];
+$birdsList  =  is_array(get_option('birds_list')) ? get_option('birds_list') : [];
+$birdsLocation  =  is_array(get_option('birds_location')) ? get_option('birds_location') : [];
+$birdsLocationFilters  =  is_array(get_option('birds_location_filters')) ? get_option('birds_location_filters') : [];
+
+?>
+
+    <script>
+        var locations = <?php echo (json_encode($birdsLocation)); ?>;
+        var filterImages = <?php echo (json_encode($birdsLocationFilters)); ?>;
+        var birds = <?php echo (json_encode($birdsList)); ?>;
+        var gallery = <?php echo (json_encode($birdsGallery)); ?>;
+    </script>
+<?php
     $shortcode = '';
     if (isset($_GET['location']) && isset($_GET['filter'])) {
-        $shortcode =  '[bird_gallery  l="' .  $_GET['location']. '" f="' . $_GET['filter'] . '"]';
+        $shortcode =  '[bird_gallery  l="' .  $_GET['location'] . '" f="' . $_GET['filter'] . '"]';
         // echo $shortcode;
     }
     $value .= '<div class="gallery ui centered grid">
@@ -200,5 +214,5 @@ function showBirds($atts)
     return $value;
 }
 
-add_shortcode('birds_list', 'showBirds');
-add_shortcode('bird_gallery', 'showGallery');
+// add_shortcode('birds_list', 'showBirds');
+// add_shortcode('bird_gallery', 'showGallery');

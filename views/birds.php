@@ -23,36 +23,78 @@ if (isset($_POST)) {
     } else if (isset($_POST['bird_location']) && !empty($_POST['bird_location'])) {
 
 
-        $datum = [
-            "id" => sanitize_text_field($_POST['bird_id']),
-            "name" => sanitize_text_field($_POST['bird_name']),
-            "description" => sanitize_text_field($_POST['bird_description']),
-            "location" => sanitize_text_field($_POST['bird_location']),
-            "filter" => sanitize_text_field($_POST['bird_filter']),
-            "image" => sanitize_text_field($_POST['bird_image']),
-        ];
+        if (isset($_POST['update_btn'])) {
+            $birdsArray  =  is_array(get_option('birds_list')) ? get_option('birds_list') : [];
+            $newArray = [];
+            // print_r($birdsArray);
 
-        $missing = '';
-        foreach ($datum as $key => $value) {
-            if (empty($value)) {
-                $missing = $key;
+            // echo "<br><br>";
+
+            foreach ($birdsArray as $arr) {
+                // echo "key: ";
+                // print_r($arr);
+                if (trim($arr['id'])  == trim($_POST['bird_id'])) {
+                    $datum = [
+                        "id" => sanitize_text_field($arr['id']),
+                        "name" => sanitize_text_field($_POST['bird_name']),
+                        "description" => sanitize_text_field($_POST['bird_description']),
+                        "location" => sanitize_text_field($_POST['bird_location']),
+                        "filter" => sanitize_text_field($_POST['bird_filter']),
+                        "image" => sanitize_text_field($_POST['bird_image']),
+                    ];
+                    array_push($newArray, $datum);
+                } else {
+
+                    $datum = [
+                        "id" => sanitize_text_field($arr['id']),
+                        "name" => sanitize_text_field($arr['name']),
+                        "description" => sanitize_text_field($arr['description']),
+                        "location" => sanitize_text_field($arr['location']),
+                        "filter" => sanitize_text_field($arr['filter']),
+                        "image" => sanitize_text_field($arr['image']),
+                    ];
+                    array_push($newArray, $datum);
+                }
             }
-        }
-        if ($missing) {
-            echo '<span style="margin-top:20px;" class="ui red tag label">' . $missing .  ' is missing </span>';
-            return;
-        }
+            // echo "<br><br>";
 
-        $birdsArray  =  is_array(get_option('birds_list')) ? get_option('birds_list') : [];
+            // print_r($newArray);
 
 
-        if (sizeof($birdsArray) > 0) {
-            array_push($birdsArray, $datum);
+            update_option('birds_list', $newArray);
         } else {
-            $birdsArray = [$datum];
-        }
 
-        update_option('birds_list', $birdsArray);
+            $datum = [
+                "id" => sanitize_text_field($_POST['bird_id']),
+                "name" => sanitize_text_field($_POST['bird_name']),
+                "description" => sanitize_text_field($_POST['bird_description']),
+                "location" => sanitize_text_field($_POST['bird_location']),
+                "filter" => sanitize_text_field($_POST['bird_filter']),
+                "image" => sanitize_text_field($_POST['bird_image']),
+            ];
+
+            $missing = '';
+            foreach ($datum as $key => $value) {
+                if (empty($value)) {
+                    $missing = $key;
+                }
+            }
+            if ($missing) {
+                echo '<span style="margin-top:20px;" class="ui red tag label">' . $missing .  ' is missing </span>';
+                return;
+            }
+
+            $birdsArray  =  is_array(get_option('birds_list')) ? get_option('birds_list') : [];
+
+
+            if (sizeof($birdsArray) > 0) {
+                array_push($birdsArray, $datum);
+            } else {
+                $birdsArray = [$datum];
+            }
+
+            update_option('birds_list', $birdsArray);
+        }
     }
 }
 
@@ -97,8 +139,8 @@ if (isset($_POST)) {
                                 $locationArray  =  is_array(get_option('birds_location')) ? get_option('birds_location') : [];
 
 
-                                foreach ($locationArray as $value) { ?>
-                                    <option value="<?php echo $value; ?>"><?php echo $value; ?></option>
+                                foreach ($locationArray as $arr) { ?>
+                                    <option value="<?php echo $arr[0]; ?>"><?php echo $arr[0]; ?></option>
                                 <?php }
                                 ?>
 
@@ -130,9 +172,9 @@ if (isset($_POST)) {
                             ?>
                             <input type='hidden' name='bird_image' id='bird_image' value='<?php echo wp_get_attachment_url(get_option('media_selector_attachment_id')); ?>' required>
 
-                            <img id='image-preview' src='<?php echo wp_get_attachment_url(get_option('media_selector_attachment_id')); ?>' class="ui medium bordered image">
+                            <img id='image-pview' src='<?php echo wp_get_attachment_url(get_option('media_selector_attachment_id')); ?>' class="ui medium bordered image">
 
-                            <input id="upload_image_button" type="button"  class="button" value="<?php _e('Upload image'); ?>" />
+                            <input id="upload_image_button" type="button" class="button" value="<?php _e('Upload image'); ?>" />
 
                         </div>
 
@@ -145,8 +187,10 @@ if (isset($_POST)) {
 
                 <div class="extra content">
                     <div class="ui divider"></div>
+
                     <div class="field">
-                        <button class="ui button right floated " type="submit">Add Location</button>
+                        <button class="ui button right floated " name="update_btn" type="submit" disabled>Update Bird</button>
+                        <button class="ui button right floated " name="add_btn" type="submit">Add Bird</button>
                     </div>
 
                 </div>
@@ -166,23 +210,30 @@ if (isset($_POST)) {
             if (!empty($birdsList)) {
 
                 foreach ($birdsList as $bird) {      ?>
- 
 
-                    <div class="item">
 
-                        <div class="ui raised segment">
-                            <div class="right floated content">
-                                <form class="ui form" method="post">
-                                    <div class="right floated author">
-                                        <input type="hidden" name="del" value="<?php echo $bird['id']; ?>" />
-                                        <button class="circular ui icon button" type="submit">
-                                            <i class="icon x"></i>
-                                        </button>
-                                    </div>
-                                </form>
-                            </div>
+                    <div class="item" id="bg-small">
+
+                        <div class="ui raised segment" style="background-image:url(<?php echo $bird['image']; ?>)">
+
+                            <form class="ui form" method="post">
+                                <div class="right floated author">
+                                    <input type="hidden" name="del" value="<?php echo $bird['id']; ?>" />
+
+                                    <button class="circular ui icon button" type="submit">
+                                        <i class="icon x"></i>
+                                    </button>
+                                </div>
+                            </form>
+                            <button class="right floated circular ui icon button" onclick="editBirdParams('<?php echo $bird['id']; ?>','<?php echo $bird['name']; ?>','<?php echo $bird['description']; ?>','<?php echo $bird['location']; ?>','<?php echo $bird['filter']; ?>','<?php echo $bird['image']; ?>')">
+                                <i class="icon edit"></i>
+                            </button>
+
                             <span class="ui red ribbon label"><?php echo $bird['name']; ?></span>
-                            <img class="ui middle aligned tiny image" src="<?php echo $bird['image']; ?>">
+
+                            <div class="content">
+                                <?php echo substr($bird['description'], 0, 20); ?>
+                            </div>
 
                             <div class="ui bottom attached label">
 
@@ -199,9 +250,6 @@ if (isset($_POST)) {
                             </div>
 
 
-                            <div class="content">
-                                <?php echo $bird['description']; ?>
-                            </div>
                         </div>
                     </div>
 
@@ -214,7 +262,6 @@ if (isset($_POST)) {
     </div>
 
 </div>
-
 
 <?php
 $my_saved_attachment_post_id = get_option('media_selector_attachment_id', 0);
@@ -243,14 +290,14 @@ $my_saved_attachment_post_id = get_option('media_selector_attachment_id', 0);
                 button: {
                     text: 'Use this image',
                 },
-                multiple: true// Set to true to allow multiple files to be selected
+                multiple: true // Set to true to allow multiple files to be selected
             });
             // When an image is selected, run a callback.
             file_frame.on('select', function() {
                 // We set multiple to false so only get one image from the uploader
                 attachment = file_frame.state().get('selection').first().toJSON();
                 // Do something with attachment.id and/or attachment.url here
-                $('#image-preview').attr('src', attachment.url);
+                $('#image-pview').attr('src', attachment.url);
                 $('#bird_image').attr('value', attachment.url);
                 // Restore the main post ID
                 wp.media.model.settings.post.id = wp_media_post_id;
@@ -258,9 +305,11 @@ $my_saved_attachment_post_id = get_option('media_selector_attachment_id', 0);
             // Finally, open the modal
             file_frame.open();
         });
-        // Restore the main ID when the add media button is pressed
+        // Restore the main ID when the add media button is pssed
         jQuery('a.add_media').on('click', function() {
             wp.media.model.settings.post.id = wp_media_post_id;
         });
     });
 </script>
+
+ 

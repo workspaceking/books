@@ -20,36 +20,74 @@
             update_option('birds_gallery', $newArray);
         } else if (isset($_POST['gallery_location']) && !empty($_POST['gallery_location'])) {
 
+            if (isset($_POST['update_btn'])) {
 
-            $datum = [
-                "id" => sanitize_text_field($_POST['gallery_id']),
-                "name" => sanitize_text_field($_POST['gallery_name']),
-                "location" => sanitize_text_field($_POST['gallery_location']),
-                "filter" => sanitize_text_field($_POST['gallery_filter']),
-                "images" => sanitize_text_field($_POST['gallery_images']),
-            ];
+                $galleryArray  =  is_array(get_option('birds_gallery')) ? get_option('birds_gallery') : [];
+                $newArray = [];
+                // print_r($birdsArray);
 
-            $missing = '';
-            foreach ($datum as $key => $value) {
-                if (empty($value)) {
-                    $missing = $key;
+                // echo "<br><br>";
+
+                foreach ($galleryArray as $arr) {
+                    if ($arr['id'] == $_POST['gallery_id']) {
+
+                        $datum = [
+                            "id" => sanitize_text_field($arr['id']),
+                            "name" => sanitize_text_field($_POST['gallery_name']),
+                            "location" => sanitize_text_field($_POST['gallery_location']),
+                            "filter" => sanitize_text_field($_POST['gallery_filter']),
+                            "images" => sanitize_text_field($_POST['gallery_images']),
+                        ];
+
+
+                        array_push($newArray, $datum);
+                    } else {
+
+                        $datum = [
+                            "id" => sanitize_text_field($arr['id']),
+                            "name" => sanitize_text_field($arr['name']), 
+                            "location" => sanitize_text_field($arr['location']),
+                            "filter" => sanitize_text_field($arr['filter']),
+                            "images" => sanitize_text_field($arr['images']),
+                        ];
+                        array_push($newArray, $datum);
+                    }
                 }
-            }
-            if ($missing) {
-                echo '<span style="margin-top:20px;" class="ui red tag label">' . $missing .  ' is missing </span>';
-                return;
-            }
+                update_option('birds_gallery', $newArray);
 
-            $galleryArray  =  is_array(get_option('birds_gallery')) ? get_option('birds_gallery') : [];
-
-
-            if (sizeof($galleryArray) > 0) {
-                array_push($galleryArray, $datum);
+                // print_r($newArray);
             } else {
-                $galleryArray = [$datum];
-            }
 
-            update_option('birds_gallery', $galleryArray);
+                $datum = [
+                    "id" => sanitize_text_field($_POST['gallery_id']),
+                    "name" => sanitize_text_field($_POST['gallery_name']),
+                    "location" => sanitize_text_field($_POST['gallery_location']),
+                    "filter" => sanitize_text_field($_POST['gallery_filter']),
+                    "images" => sanitize_text_field($_POST['gallery_images']),
+                ];
+
+                $missing = '';
+                foreach ($datum as $key => $value) {
+                    if (empty($value)) {
+                        $missing = $key;
+                    }
+                }
+                if ($missing) {
+                    echo '<span style="margin-top:20px;" class="ui red tag label">' . $missing .  ' is missing </span>';
+                    return;
+                }
+
+                $galleryArray  =  is_array(get_option('birds_gallery')) ? get_option('birds_gallery') : [];
+
+
+                if (sizeof($galleryArray) > 0) {
+                    array_push($galleryArray, $datum);
+                } else {
+                    $galleryArray = [$datum];
+                }
+
+                update_option('birds_gallery', $galleryArray);
+            }
         }
     }
 
@@ -86,8 +124,8 @@
                                     $locationArray  =  is_array(get_option('birds_location')) ? get_option('birds_location') : [];
 
 
-                                    foreach ($locationArray as $value) { ?>
-                                     <option value="<?php echo $value; ?>"><?php echo $value; ?></option>
+                                    foreach ($locationArray as $arr) { ?>
+                                     <option value="<?php echo $arr[0]; ?>"><?php echo $arr[0]; ?></option>
                                  <?php }
                                     ?>
 
@@ -120,29 +158,27 @@
                      <div class="ui divider"></div>
                      <div class="field">
 
-                         <div class="field">
 
-                             <?php
-                                if (isset($_POST['submit_image_selector']) && isset($_POST['gallery_images'])) :
-                                    update_option('media_selector_attachment_id', absint($_POST['gallery_images']));
-                                endif;
-                                wp_enqueue_media();
-                                ?>
-                             <input type="hidden" name='gallery_images' id='gallery_images' required></textarea>
+                         <?php
+                            if (isset($_POST['submit_image_selector']) && isset($_POST['gallery_images'])) :
+                                update_option('media_selector_attachment_id', absint($_POST['gallery_images']));
+                            endif;
+                            wp_enqueue_media();
+                            ?>
+                         <input type="hidden" name='gallery_images' id='gallery_images' required></textarea>
 
-                             <div class="ui tiny images" id="bird_gallery">
-                             </div>
-
-
-                             <input id="upload_image_button" type="button" class="button" value="<?php _e('Upload image'); ?>" />
-
+                         <div class="ui tiny images" id="bird_gallery">
                          </div>
+
+
+                         <input id="upload_image_button" type="button" class="button" value="<?php _e('Upload images'); ?>" />
 
 
                          <div class="extra content">
                              <div class="ui divider"></div>
                              <div class="field">
-                                 <button class="ui button right floated " type="submit">Add Gallery</button>
+                                 <button class="ui button right floated " name="update_btn" type="submit" disabled>Update Gallery</button>
+                                 <button class="ui button right floated " name="add_btn" type="submit">Add Gallery</button>
                              </div>
 
                          </div>
@@ -153,7 +189,7 @@
          </form>
      </div>
 
-     <div class="six wide column">
+     <div class="six wide column" id="gallery">
          <div class="" style="padding:10px"></div>
 
          <?php
@@ -167,7 +203,8 @@
                     ?>
                  <div class="card">
                      <div>
-                     <div class="ui top attached">[bird_gallery g="<?php echo $gallery['id']; ?>" l="<?php echo $gallery['location']; ?>" f="<?php echo $gallery['filter']; ?>"]</div>
+                         <!-- shortcode -->
+                         <!-- <div class="ui top attached">[bird_gallery g="<?php echo $gallery['id']; ?>" l="<?php echo $gallery['location']; ?>" f="<?php echo $gallery['filter']; ?>"]</div> -->
                          <span class="ui basic image label">
                              <i class="map marker icon"></i>
                              <?php echo $gallery['name']; ?>
@@ -189,17 +226,36 @@
                                  </button>
                              </div>
                          </form>
+                         <script>
+                             imagesUrl = [];
+                         </script>
+                         <?php
+                                    $imageParams = '';
+                                    for ($i = 0; $i < sizeof($images); $i++) {  ?>
 
+                             <script>
+                                 imagesUrl.push('<?php echo $images[$i]; ?>');
+                             </script>
+
+                         <?php
+                                    }
+                                    ?>
+
+
+
+                         <button class="right floated circular ui icon button" onclick="editGalleryParams('<?php echo $gallery['id']; ?>','<?php echo $gallery['name']; ?>' ,'<?php echo $gallery['location']; ?>','<?php echo $gallery['filter']; ?>',imagesUrl)">
+                             <i class="icon edit"></i>
+                         </button>
                      </div>
 
                      <br>
                      <br>
 
-                     <div class="ui small images segment">
+                     <div class="ui small images">
                          <?php
                                     foreach ($images as $value) { ?>
 
-                             <img src="<?php echo $value; ?>" style="height: 85px;width:auto;">
+                             <div style="background-image:url(<?php echo $value; ?>)"></div>
 
 
                          <?php }
@@ -271,7 +327,7 @@
 
                  datum.forEach(data => {
 
-                     galleryItem += '<img class="ui image" src="' + data.url + '">';
+                     galleryItem += '<div class="ui image" style="background-image:url(' + data.url + ')"></div>';
                      imagesUrl.push(data.url);
 
                  });
