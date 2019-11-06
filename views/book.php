@@ -63,7 +63,7 @@ $birdsLocationFilters  =  is_array(get_option('birds_location_filters')) ? get_o
 <script>
     var selectedLocation = '';
 
-    var selectedFilter = 'Spring';
+    var selectedFilter = 'Summer';
     var locations = <?php echo (json_encode($birdsLocation)); ?>;
     var filterImages = <?php echo (json_encode($birdsLocationFilters)); ?>;
     var birds = <?php echo (json_encode($birdsList)); ?>;
@@ -144,16 +144,13 @@ $birdsLocationFilters  =  is_array(get_option('birds_location_filters')) ? get_o
 
         var bgimg = '';
         filterImages.forEach(fltr => {
-            console.log("value of testsat " + selectedLocation.localeCompare(fltr.location) + " {}{}{}{} " + selectedFilter.localeCompare(fltr.filter));
+            console.log("value of testsat "  + selectedLocation.localeCompare(fltr.location) + " {}{}{}{} " + selectedFilter.localeCompare(fltr.filter)  );
             if (selectedLocation.localeCompare(fltr.location) == 0 && selectedFilter.localeCompare(fltr.filter) == 0) {
-
                 bgimg = fltr.image;
             }
-            if (bgimg != '')
-                jQuery('.locationSlides.current-location-slide').css('background-image', 'url("' + fltr.image + '")');
         });
 
-
+       
         jQuery('.locationSlides.current-location-slide').css({
             backgroundImage: bgimg
         });

@@ -21,52 +21,52 @@ function loadStylesandScripts()
 {
 
     wp_enqueue_style('gallery-css',  plugin_dir_url(__FILE__) . 'css/book.css');
-    wp_enqueue_style('semantic-ui',  plugin_dir_url(__FILE__) .  'js/semantic.min.css');
+    wp_enqueue_style('semantic-ui',  plugin_dir_url(__FILE__) .  'css/semantic.min.css');
     wp_enqueue_script('semantic-ui-script',  plugin_dir_url(__FILE__) .  'js/semantic.min.js', ['jquery'], '', true);
 }
 add_action('wp_enqueue_scripts', 'loadStylesandScripts');
 
-function showGallery($atts)
-{
-    // return  $atts['g'];
+// function showGallery($atts)
+// {
+//     // return  $atts['g'];
 
-    $galleryList  =  is_array(get_option('birds_gallery')) ? get_option('birds_gallery') : [];
-    $selectedGallery = '';
-    if (!empty($galleryList)) {
+//     $galleryList  =  is_array(get_option('birds_gallery')) ? get_option('birds_gallery') : [];
+//     $selectedGallery = '';
+//     if (!empty($galleryList)) {
 
-        foreach ($galleryList as $gallery) {
-            $images = explode(",", $gallery['images']);
-            $g = '';
-            if (isset($atts['g']))
-                $g = $atts['g'];
-            if ($gallery['id'] == $g || $gallery['location'] == $atts['l'] || $gallery['location'] == $atts['l'] && $gallery['filter'] == $atts['f']) {
-                $selectedGallery .=  ' <div class="card">
-            <div>
-         
-        
-                <form class="ui form" method="post">
-                    <div class="right floated author">
-                        <input type="hidden" name="del" value="' . $gallery['id'] . '" />
-                        <button class="circular ui icon button  right floated " type="submit">
-                            <i class="icon x"></i>
-                        </button>
-                    </div>
-                </form>
-        
-            </div> 
-        
-            <div class="ui small images segment">
-        
-                ' . getImages($images) . ' ' . $g . '
-        
-            </div>
-        </div>
-         ';
-            }
-        }
-    }
-    return '<div class="row"> ' . $selectedGallery . '</div>';
-}
+//         foreach ($galleryList as $gallery) {
+//             $images = explode(",", $gallery['images']);
+//             $g = '';
+//             if (isset($atts['g']))
+//                 $g = $atts['g'];
+//             if ($gallery['id'] == $g || $gallery['location'] == $atts['l'] || $gallery['location'] == $atts['l'] && $gallery['filter'] == $atts['f']) {
+//                 $selectedGallery .=  ' <div class="card">
+//             <div>
+
+
+//                 <form class="ui form" method="post">
+//                     <div class="right floated author">
+//                         <input type="hidden" name="del" value="' . $gallery['id'] . '" />
+//                         <button class="circular ui icon button  right floated " type="submit">
+//                             <i class="icon x"></i>
+//                         </button>
+//                     </div>
+//                 </form>
+
+//             </div> 
+
+//             <div class="ui small images segment">
+
+//                 ' . getImages($images) . ' ' . $g . '
+
+//             </div>
+//         </div>
+//          ';
+//             }
+//         }
+//     }
+//     return '<div class="row"> ' . $selectedGallery . '</div>';
+// }
 
 
 
@@ -182,13 +182,13 @@ function showBirds($atts)
 
         </div>
     </div>
-'; 
-$birdsGallery  =  is_array(get_option('birds_gallery')) ? get_option('birds_gallery') : [];
-$birdsList  =  is_array(get_option('birds_list')) ? get_option('birds_list') : [];
-$birdsLocation  =  is_array(get_option('birds_location')) ? get_option('birds_location') : [];
-$birdsLocationFilters  =  is_array(get_option('birds_location_filters')) ? get_option('birds_location_filters') : [];
+';
+    $birdsGallery  =  is_array(get_option('birds_gallery')) ? get_option('birds_gallery') : [];
+    $birdsList  =  is_array(get_option('birds_list')) ? get_option('birds_list') : [];
+    $birdsLocation  =  is_array(get_option('birds_location')) ? get_option('birds_location') : [];
+    $birdsLocationFilters  =  is_array(get_option('birds_location_filters')) ? get_option('birds_location_filters') : [];
 
-?>
+    ?>
 
     <script>
         var locations = <?php echo (json_encode($birdsLocation)); ?>;
@@ -196,13 +196,13 @@ $birdsLocationFilters  =  is_array(get_option('birds_location_filters')) ? get_o
         var birds = <?php echo (json_encode($birdsList)); ?>;
         var gallery = <?php echo (json_encode($birdsGallery)); ?>;
     </script>
-<?php
-    $shortcode = '';
-    if (isset($_GET['location']) && isset($_GET['filter'])) {
-        $shortcode =  '[bird_gallery  l="' .  $_GET['location'] . '" f="' . $_GET['filter'] . '"]';
-        // echo $shortcode;
-    }
-    $value .= '<div class="gallery ui centered grid">
+    <?php
+        $shortcode = '';
+        if (isset($_GET['location']) && isset($_GET['filter'])) {
+            $shortcode =  '[bird_gallery  l="' .  $_GET['location'] . '" f="' . $_GET['filter'] . '"]';
+            // echo $shortcode;
+        }
+        $value .= '<div class="gallery ui centered grid">
     <div class="six wide tablet sixteen wide mobile  twelve wide computer column">
         <div id="bird_gallery">
             <div class="ui cards centered">
@@ -211,8 +211,261 @@ $birdsLocationFilters  =  is_array(get_option('birds_location_filters')) ? get_o
         </div>
     </div>
 </div>';
-    return $value;
-}
+        return $value;
+    }
 
+
+    function showGallery($attr)
+    { ?>
+
+    <div class="container">
+        <div class="pt-8"></div>
+
+        <div class="" style="padding:10px"></div>
+        <div class="ui centered grid">
+            <div class="birds-slideshow six wide tablet sixteen wide mobile  six wide computer column">
+
+                <div class="location-slideshow-container"> </div>
+
+
+                <div class="filters">
+                    <a class="ui small label"> Spring </a>
+                    <a class="ui small label"> Summer </a>
+                    <a class="ui small label"> Autumn </a>
+                    <a class="ui small label"> Winter </a>
+                </div>
+
+                <div class="ui middle aligned divided list birds-list">
+                    <div class="item">
+
+                        <img class="ui avatar image" src="/images/avatar2/small/molly.png">
+                        <div class="content">
+                            Molly
+                        </div>
+                    </div>
+                </div>
+                <div id="gallerySlider">
+                    <a class="control_next">></a>
+                    <a class="control_prev">
+                        < </a> <ul>
+
+                            </ul>
+                </div>
+
+                <div class="slider_option">
+                    <input type="checkbox" id="checkbox">
+                    <label for="checkbox">Autoplay Slider</label>
+                </div>
+
+
+
+            </div>
+        </div>
+    </div>
+
+
+
+    <?php
+
+        $birdsGallery  =  is_array(get_option('birds_gallery')) ? get_option('birds_gallery') : [];
+        $birdsList  =  is_array(get_option('birds_list')) ? get_option('birds_list') : [];
+        $birdsLocation  =  is_array(get_option('birds_location')) ? get_option('birds_location') : [];
+        $birdsLocationFilters  =  is_array(get_option('birds_location_filters')) ? get_option('birds_location_filters') : [];
+
+        ?>
+    <script>
+        var selectedLocation = '';
+
+        var selectedFilter = 'Spring';
+        var locations = <?php echo (json_encode($birdsLocation)); ?>;
+        var filterImages = <?php echo (json_encode($birdsLocationFilters)); ?>;
+        var birds = <?php echo (json_encode($birdsList)); ?>;
+        var gallery = <?php echo (json_encode($birdsGallery)); ?>;
+        var locSlides = '';
+        var show = 0;
+        locations.forEach(data => {
+            var showstyle = "";
+            if (show == 0) {
+                showstyle = "display:block";
+            } else {
+                showstyle = '';
+            }
+            show = 1;
+
+            locSlides += '<div class="locationSlides" style="' + showstyle + '">' + data[0] + '</div>';
+        });
+
+        locSlides += '<a class="prev" onclick="plusLocationSlides(-1)">&#10094;</a>' +
+            '<a class="next" onclick="plusLocationSlides(1)">&#10095;</a>';
+        jQuery('.location-slideshow-container').html(locSlides);
+
+
+
+        function galleryView() {
+
+
+            var birdsList = '';
+            birds.forEach(data => {
+
+                console.log('selected location = ' + selectedLocation.localeCompare(data.location) + ' :: ' + selectedLocation + " == " + data.location);
+
+                if (selectedLocation.localeCompare(data.location) == 0 && selectedFilter.localeCompare(data.filter) == 0) {
+
+                    birdsList +=
+                        '<div class="item inline-flex">' +
+                        '<div class="content">' +
+                        ' Description ' +
+                        '<p>' + data.description + '</p>' +
+                        '</div>' +
+                        '<img class="ui small image" src="' + data.image + '">' +
+                        '</div>';
+                }
+
+
+            });
+
+            jQuery('.birds-list').html(birdsList);
+
+
+
+            var gallerySlide = '';
+            var show = 0;
+            gallery.forEach(data => {
+
+
+                console.log('selected location = ' + selectedLocation.localeCompare(data.location) + ' :: ' + selectedLocation + " == " + data.location);
+
+                if (selectedLocation.localeCompare(data.location) == 0 && selectedFilter.localeCompare(data.filter) == 0) {
+
+                    var showstyle = "";
+                    if (show == 0) {
+                        showstyle = "display:block";
+                    } else {
+                        showstyle = '';
+                    }
+                    show = 1;
+                    var imgs = gallery[0].images.split(',');
+                    console.log(imgs);
+                    imgs.forEach(singleImage => {
+
+                        gallerySlide += ' <li style="background: url(' + singleImage + ');"></li> ';
+                    });
+                }
+
+
+            });
+
+            var bgimg = '';
+            filterImages.forEach(fltr => {
+                console.log("value of testsat " + selectedLocation.localeCompare(fltr.location) + " {}{}{}{} " + selectedFilter.localeCompare(fltr.filter));
+                if (selectedLocation.localeCompare(fltr.location) == 0 && selectedFilter.localeCompare(fltr.filter) == 0) {
+                    bgimg = fltr.image;
+
+                    document.querySelector('.locationSlides.current-location-slide').style.backgroundImage = "url(" + bgimg + ")"; 
+                    document.querySelector('.locationSlides.current-location-slide').style.backgroundSize = "cover"; 
+
+                }
+            });
+
+
+            jQuery('#gallerySlider ul').html(gallerySlide);
+
+        }
+
+        galleryView();
+
+        var slideIndex = 1;
+        currentLocationSlide(slideIndex);
+
+        function plusLocationSlides(n) {
+            currentLocationSlide(slideIndex += n);
+
+        }
+
+
+        function currentLocationSlide(n) {
+            var i;
+            var slides = jQuery(".location-slideshow-container .locationSlides");
+
+            if (n > slides.length) {
+                slideIndex = 1
+            }
+            if (n < 1) {
+                slideIndex = slides.length;
+            }
+            for (i = 0; i < slides.length; i++) {
+                slides[i].style.display = "none";
+                jQuery(slides[i]).removeClass('current-location-slide');
+            }
+
+            slides[slideIndex - 1].style.display = "block";
+
+            jQuery(slides[slideIndex - 1]).addClass('current-location-slide');
+
+            selectedLocation = jQuery('.locationSlides.current-location-slide').html();
+
+            galleryView();
+        }
+    </script>
+
+
+
+    <script>
+        jQuery(document).ready(function($) {
+
+            $('#checkbox').change(function() {
+                setInterval(function() {
+                    moveRight();
+                }, 3000);
+            });
+
+            var slideCount = $('#gallerySlider ul li').length;
+            var slideWidth = $('#gallerySlider ul li').width();
+            var slideHeight = $('#gallerySlider ul li').height();
+            var gallerySliderUlWidth = slideCount * slideWidth;
+
+            $('#gallerySlider').css({
+                width: slideWidth,
+                height: slideHeight
+            });
+
+
+
+            $('#gallerySlider ul li:last-child').prependTo('#gallerySlider ul');
+
+            function moveLeft() {
+                $('#gallerySlider ul').animate({
+                    left: +slideWidth
+                }, 200, function() {
+                    $('#gallerySlider ul li:last-child').prependTo('#gallerySlider ul');
+                    $('#gallerySlider ul').css('left', '');
+                });
+            };
+
+            function moveRight() {
+                $('#gallerySlider ul').animate({
+                    left: -slideWidth
+                }, 200, function() {
+                    $('#gallerySlider ul li:first-child').appendTo('#gallerySlider ul');
+                    $('#gallerySlider ul').css('left', '');
+                });
+            };
+
+            $('a.control_prev').click(function() {
+                moveLeft();
+            });
+
+            $('a.control_next').click(function() {
+                moveRight();
+            });
+
+        });
+        jQuery('.filters .label').click(function() {
+            selectedFilter = jQuery(this).text().trim();
+            galleryView();
+        });
+    </script>
+<?php
+}
 // add_shortcode('birds_list', 'showBirds');
-// add_shortcode('bird_gallery', 'showGallery');
+add_shortcode('bird_gallery', 'showGallery');
