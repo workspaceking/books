@@ -276,7 +276,7 @@ function showBirds($atts)
     <script>
         var selectedLocation = '';
 
-        var selectedFilter = 'Spring';
+        var selectedFilter = 'Summer';
         var locations = <?php echo (json_encode($birdsLocation)); ?>;
         var filterImages = <?php echo (json_encode($birdsLocationFilters)); ?>;
         var birds = <?php echo (json_encode($birdsList)); ?>;
@@ -359,10 +359,7 @@ function showBirds($atts)
             filterImages.forEach(fltr => {
                 console.log("value of testsat " + selectedLocation.localeCompare(fltr.location) + " {}{}{}{} " + selectedFilter.localeCompare(fltr.filter));
                 if (selectedLocation.localeCompare(fltr.location) == 0 && selectedFilter.localeCompare(fltr.filter) == 0) {
-                    bgimg = fltr.image;
-
-                    document.querySelector('.locationSlides.current-location-slide').style.backgroundImage = "url(" + bgimg + ")"; 
-                    document.querySelector('.locationSlides.current-location-slide').style.backgroundSize = "cover"; 
+                    bgimg = fltr.image; 
 
                 }
             });
