@@ -24,16 +24,6 @@ class BirdBookAdminPages
 		);
  
 
-		add_action('admin_print_styles' , array($this, 'add_stylesheets'));
-		add_action('admin_print_scripts' , array($this, 'add_scripts'));
-		add_submenu_page(
-			'birdbook-books-submenu-page',
-			'Birds',
-			'Birds',
-			'manage_options',
-			'birdbook-birds-settings',
-			function() { $this->birdbook_books_submenu_page_callback('birds'); }
-		);
 		// add_submenu_page( parent_slug, page_title, menu_title, capability, menu_slug, function )
 		add_submenu_page(
 			'birdbook-books-submenu-page',
@@ -44,16 +34,26 @@ class BirdBookAdminPages
 			function() { $this->birdbook_books_submenu_page_callback('location'); }
 		);
 
+		// add_submenu_page(
+		// 	'birdbook-books-submenu-page',
+		// 	'Filters',
+		// 	'Filters',
+		// 	'manage_options',
+		// 	'birdbook-bird-filters-settings',
+		// 	function() { $this->birdbook_books_submenu_page_callback('filter'); }
+		// );
+
+		add_action('admin_print_styles' , array($this, 'add_stylesheets'));
+		add_action('admin_print_scripts' , array($this, 'add_scripts'));
 		add_submenu_page(
 			'birdbook-books-submenu-page',
-			'Filters',
-			'Filters',
+			'Birds',
+			'Birds',
 			'manage_options',
-			'birdbook-bird-filters-settings',
-			function() { $this->birdbook_books_submenu_page_callback('filter'); }
+			'birdbook-birds-settings',
+			function() { $this->birdbook_books_submenu_page_callback('birds'); }
 		);
 
-	
 
 		add_submenu_page(
 			'birdbook-books-submenu-page',

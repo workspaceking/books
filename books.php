@@ -247,15 +247,15 @@ function showBirds($atts)
                 <div id="gallerySlider">
                     <a class="control_next">></a>
                     <a class="control_prev">
-                        < </a> <ul>
+                        < </a> <ul id="location-gallery">
 
                             </ul>
                 </div>
 
-                <div class="slider_option">
+                <!-- <div class="slider_option">
                     <input type="checkbox" id="checkbox">
                     <label for="checkbox">Autoplay Slider</label>
-                </div>
+                </div> -->
 
 
 
@@ -273,6 +273,39 @@ function showBirds($atts)
         $birdsLocationFilters  =  is_array(get_option('birds_location_filters')) ? get_option('birds_location_filters') : [];
 
         ?>
+
+        
+<!-- The Modal -->
+<div id="lightbox-modal" class="modal">
+    <span class="close">&times;</span>
+    <img class="modal-content" id="modal-image">
+    <div id="caption"></div>
+</div>
+
+<script>
+    function previewImage(e) {
+        var modal = document.getElementById("lightbox-modal");
+
+        // Get the image and insert it inside the modal - use its "alt" text as a caption
+        var modalImage = document.querySelectorAll('.birds-list div.image');
+        var modalImg = document.getElementById("modal-image");
+        var captionText = document.getElementById("caption");
+
+
+        // Get the <span> element that closes the modal
+        var span = document.getElementsByClassName("close")[0];
+
+        // When the user clicks on <span> (x), close the modal
+        span.onclick = function() {
+            modal.style.display = "none";
+        }
+        modal.style.display = "block";
+        modalImg.src = e.getAttribute('data');
+        captionText.innerHTML = e.getAttribute('alt');
+        console.log(e.getAttribute('data'))
+
+    }
+</script>
     <script>
         var selectedLocation = '';
 
@@ -292,13 +325,13 @@ function showBirds($atts)
             }
             show = 1;
 
-            locSlides += '<div class="locationSlides" style="' + showstyle + '">' + data[0] + '</div>';
+            locSlides += '<div class="locationSlides" style="' + showstyle + ';background:url(' + data[1] + ');background-size: cover;background-position: center;">' + data[0] + '</div>';
         });
 
         locSlides += '<a class="prev" onclick="plusLocationSlides(-1)">&#10094;</a>' +
             '<a class="next" onclick="plusLocationSlides(1)">&#10095;</a>';
         jQuery('.location-slideshow-container').html(locSlides);
-
+        var galleryHTML = '';
 
 
         function galleryView() {
@@ -314,10 +347,11 @@ function showBirds($atts)
                     birdsList +=
                         '<div class="item inline-flex">' +
                         '<div class="content">' +
+                        '<h3 style="text-transform: capitalize;">' + data.name + '</h3>' +
                         ' Description ' +
                         '<p>' + data.description + '</p>' +
                         '</div>' +
-                        '<img class="ui small image" src="' + data.image + '">' +
+                        '<div class="image" onclick="previewImage(this)" data="' + data.image + '" alt="' + data.name + '" style="background: url(' + data.image + ');background-size: cover;background-repeat: no-repeat;""></div>' +
                         '</div>';
                 }
 
@@ -348,7 +382,7 @@ function showBirds($atts)
                     console.log(imgs);
                     imgs.forEach(singleImage => {
 
-                        gallerySlide += ' <li style="background: url(' + singleImage + ');"></li> ';
+                        gallerySlide += ' <li style="background: url(' + singleImage + ');background-position: center;background-size: 100%;"></li> ';
                     });
                 }
 
@@ -359,13 +393,22 @@ function showBirds($atts)
             filterImages.forEach(fltr => {
                 console.log("value of testsat " + selectedLocation.localeCompare(fltr.location) + " {}{}{}{} " + selectedFilter.localeCompare(fltr.filter));
                 if (selectedLocation.localeCompare(fltr.location) == 0 && selectedFilter.localeCompare(fltr.filter) == 0) {
-                    bgimg = fltr.image; 
+                    bgimg = fltr.image;
 
                 }
             });
 
 
             jQuery('#gallerySlider ul').html(gallerySlide);
+
+            galleryHTML = jQuery('#gallerySlider ul').html();
+
+            if (galleryHTML.length > 0) {
+                jQuery('#gallerySlider').removeClass("hidden");
+
+            } else {
+                jQuery('#gallerySlider').addClass("hidden");
+            }
 
         }
 
@@ -466,3 +509,5 @@ function showBirds($atts)
 }
 // add_shortcode('birds_list', 'showBirds');
 add_shortcode('bird_gallery', 'showGallery');
+
+?>
