@@ -29,7 +29,7 @@
 
 
             </div> -->
-
+ 
             <div id="gallerySlider">
                 <a class="control_next">></a>
                 <a class="control_prev">
@@ -38,10 +38,10 @@
                         </ul>
             </div>
 
-            <div class="slider_option">
+            <!-- <div class="slider_option">
                 <input type="checkbox" id="checkbox">
                 <label for="checkbox">Autoplay Slider</label>
-            </div>
+            </div> -->
 
 
 
@@ -76,11 +76,9 @@ $birdsLocationFilters  =  is_array(get_option('birds_location_filters')) ? get_o
         } else {
             showstyle = '';
         }
-        console.log(data)
         show = 1;
-        var styleData = 'background-image:url(' + data[1] + ')';
-        locSlides += '<div class="locationSlides"  ">' + data[0] + '</div>';
-         
+
+        locSlides += '<div class="locationSlides admin" style="' + showstyle + '">' + data[0] + '</div>';
     });
 
     locSlides += '<a class="prev" onclick="plusLocationSlides(-1)">&#10094;</a>' +
@@ -145,13 +143,13 @@ $birdsLocationFilters  =  is_array(get_option('birds_location_filters')) ? get_o
 
         var bgimg = '';
         filterImages.forEach(fltr => {
-            console.log("value of testsat " + selectedLocation.localeCompare(fltr.location) + " {}{}{}{} " + selectedFilter.localeCompare(fltr.filter));
+            console.log("value of testsat "  + selectedLocation.localeCompare(fltr.location) + " {}{}{}{} " + selectedFilter.localeCompare(fltr.filter)  );
             if (selectedLocation.localeCompare(fltr.location) == 0 && selectedFilter.localeCompare(fltr.filter) == 0) {
                 bgimg = fltr.image;
             }
         });
 
-
+       
         jQuery('.locationSlides.current-location-slide').css({
             backgroundImage: bgimg
         });
