@@ -1,7 +1,7 @@
 <div class="container">
     <div class="pt-8"></div>
 
-    <div class="" style="padding:10px"></div>
+    <div class=""  ></div>
     <div class="ui centered grid">
         <div class="birds-slideshow six wide tablet sixteen wide mobile  six wide computer column">
 

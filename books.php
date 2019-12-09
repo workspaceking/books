@@ -22,6 +22,8 @@ function loadStylesandScripts()
 
     wp_enqueue_style('gallery-css',  plugin_dir_url(__FILE__) . 'css/book.css');
     wp_enqueue_style('semantic-ui',  plugin_dir_url(__FILE__) .  'css/semantic.min.css');
+    wp_enqueue_style('gallery-fonts',   'https://fonts.googleapis.com/css?family=Titillium+Web&display=swap');
+
     wp_enqueue_script('semantic-ui-script',  plugin_dir_url(__FILE__) .  'js/semantic.min.js', ['jquery'], '', true);
 }
 add_action('wp_enqueue_scripts', 'loadStylesandScripts');
@@ -221,9 +223,9 @@ function showBirds($atts)
     <div class="container">
         <div class="pt-8"></div>
 
-        <div class="" style="padding:10px"></div>
+        <div class=""  ></div>
         <div class="ui centered grid">
-            <div class="birds-slideshow six wide tablet sixteen wide mobile  six wide computer column">
+            <div class="birds-slideshow  wide  column">
 
                 <div class="location-slideshow-container"> </div>
 
@@ -274,38 +276,38 @@ function showBirds($atts)
 
         ?>
 
-        
-<!-- The Modal -->
-<div id="lightbox-modal" class="modal">
-    <span class="close">&times;</span>
-    <img class="modal-content" id="modal-image">
-    <div id="caption"></div>
-</div>
 
-<script>
-    function previewImage(e) {
-        var modal = document.getElementById("lightbox-modal");
+    <!-- The Modal -->
+    <div id="lightbox-modal" class="modal">
+        <span class="close">&times;</span>
+        <img class="modal-content" id="modal-image">
+        <div id="caption"></div>
+    </div>
 
-        // Get the image and insert it inside the modal - use its "alt" text as a caption
-        var modalImage = document.querySelectorAll('.birds-list div.image');
-        var modalImg = document.getElementById("modal-image");
-        var captionText = document.getElementById("caption");
+    <script>
+        function previewImage(e) {
+            var modal = document.getElementById("lightbox-modal");
+
+            // Get the image and insert it inside the modal - use its "alt" text as a caption
+            var modalImage = document.querySelectorAll('.birds-list div.image');
+            var modalImg = document.getElementById("modal-image");
+            var captionText = document.getElementById("caption");
 
 
-        // Get the <span> element that closes the modal
-        var span = document.getElementsByClassName("close")[0];
+            // Get the <span> element that closes the modal
+            var span = document.getElementsByClassName("close")[0];
 
-        // When the user clicks on <span> (x), close the modal
-        span.onclick = function() {
-            modal.style.display = "none";
+            // When the user clicks on <span> (x), close the modal
+            span.onclick = function() {
+                modal.style.display = "none";
+            }
+            modal.style.display = "block";
+            modalImg.src = e.getAttribute('data');
+            captionText.innerHTML = e.getAttribute('alt');
+            console.log(e.getAttribute('data'))
+
         }
-        modal.style.display = "block";
-        modalImg.src = e.getAttribute('data');
-        captionText.innerHTML = e.getAttribute('alt');
-        console.log(e.getAttribute('data'))
-
-    }
-</script>
+    </script>
     <script>
         var selectedLocation = '';
 
@@ -351,7 +353,7 @@ function showBirds($atts)
                         ' Description ' +
                         '<p>' + data.description + '</p>' +
                         '</div>' +
-                        '<div class="image" onclick="previewImage(this)" data="' + data.image + '" alt="' + data.name + '" style="background: url(' + data.image + ');background-size: cover;background-repeat: no-repeat;""></div>' +
+                        '<div class="image" onclick="previewImage(this)" data="' + data.image + '" alt="' + data.name + '" style="background: url(' + data.image + ');background-size: cover;background-repeat: no-repeat;background-position: center;height:auto"></div>' +
                         '</div>';
                 }
 
@@ -382,7 +384,7 @@ function showBirds($atts)
                     console.log(imgs);
                     imgs.forEach(singleImage => {
 
-                        gallerySlide += ' <li style="background: url(' + singleImage + ');background-position: center;background-size: 100%;"></li> ';
+                        gallerySlide += ' <li style="background: url(' + singleImage + ');background-position: center;background-size: cover;"></li> ';
                     });
                 }
 
