@@ -11,8 +11,12 @@ License URI: https://www.gnu.org/licenses/gpl-2.0.html
 Text Domain: birdbook
 Domain Path: /languages
 */
-
-require_once __DIR__ . '/includes/class-birdbook-book-search.php';
+// 1) arrows not changed yet
+// 2) body background color -> #fff
+// 3) min-height of birds section
+// 4) add same margin/padding between last bird and gallery,
+// as it's between first bird and filter -> photo attached
+ 
 require_once __DIR__ . '/includes/class-birdbook-admin-pages.php';
 
 new \birdbook\birdbooksearch(new \birdbook\BirdBookBook(), new \birdbook\BirdBookGoogleBookApi());
@@ -247,9 +251,9 @@ function showBirds($atts)
                     </div>
                 </div>
                 <div id="gallerySlider">
-                    <a class="control_next">></a>
+                    <a class="control_next"> </a>
                     <a class="control_prev">
-                        < </a> <ul id="location-gallery">
+                          </a> <ul id="location-gallery">
 
                             </ul>
                 </div>
@@ -330,8 +334,8 @@ function showBirds($atts)
             locSlides += '<div class="locationSlides" style="' + showstyle + ';background:url(' + data[1] + ');background-size: cover;background-position: center;">' + data[0] + '</div>';
         });
 
-        locSlides += '<a class="prev" onclick="plusLocationSlides(-1)">&#10094;</a>' +
-            '<a class="next" onclick="plusLocationSlides(1)">&#10095;</a>';
+        locSlides += '<a class="prev" onclick="plusLocationSlides(-1)"></a>' +
+            '<a class="next" onclick="plusLocationSlides(1)"></a>';
         jQuery('.location-slideshow-container').html(locSlides);
         var galleryHTML = '';
 
